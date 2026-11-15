@@ -31,6 +31,19 @@ jobs:
       - run: uv run mypy
       - run: uv run pytest
 
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - run: docker build -t extraction-api:ci projects/p01-extraction-api
+
+      - name: Image prints the package version
+        run: test "$(docker run --rm extraction-api:ci)" = "0.1.0"
+
+      - name: Image runs as non-root
+        run: test "$(docker run --rm extraction-api:ci id -u)" != "0"
+
   secrets:
     runs-on: ubuntu-latest
     steps:
