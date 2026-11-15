@@ -5,6 +5,7 @@
 -write the failing test first, then the code.
 -One small change per commit
 -Run lint, type-check and tests before saying "done"
+-Commit messages follow Conventional Commits (feat:, fix:, chore:).
 
 ## Limits
 
